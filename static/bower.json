@@ -1,0 +1,9 @@
+{
+  "name": "operis-configuration",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "1.9.1",
+    "handlebars": "1.2.1",
+    "ember": "1.5.0"
+  }
+}

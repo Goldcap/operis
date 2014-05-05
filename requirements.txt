@@ -1,0 +1,12 @@
+Django==1.5.4
+MySQL-python
+djangorestframework
+markdown
+django-filter
+PIL==1.1.7
+distribute==0.6.27
+south==0.8.1
+circus
+circus-web
+chaussette
+django-sslify
