@@ -52,7 +52,7 @@ module.exports = function(grunt) {
       tests: {
         type: 'amd',
         moduleName: function(path) {
-          return 'example/tests/' + path;
+          return 'operis/tests/' + path;
         },
         files: [{
           expand: true,
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
       app: {
         type: 'amd',
         moduleName: function(path) {
-          return 'example/' + path;
+          return 'operis/' + path;
         },
         files: [{
           expand: true,
@@ -77,24 +77,40 @@ module.exports = function(grunt) {
     concat: {
       dist: {
           src: [
+            'javascripts/vendor/modernizr/modernizr.js',
+            'javascripts/vendor/fastclick/lib/fastclick.js',
             'javascripts/vendor/jquery/jquery.min.js',
+            'javascripts/vendor/jquery-placeholder/jquery.placeholder.js',
+            'javascripts/vendor/jquery.cookie/jquery.cookie.js',
             'javascripts/vendor/handlebars/handlebars.js',
             'javascripts/vendor/ember/ember.min.js',
+            'javascripts/vendor/ember-data/ember-data.js',
+            'javascripts/vendor/ember-data-django-rest-adapter/build/ember-data-django-rest-adapter.js',
             'javascripts/lib/loader.js',
             'javascripts/lib/ember-resolver.js',
+            'javascripts/vendor/foundation/js/foundation.js',    
+            'javascripts/vendor/foundation/js/foundation.*.js',
             'javascripts/dist/transpiled/app/**/*.js',
             'javascripts/dist/tmpl.min.js'],
           dest: 'javascripts/dist/deps.min.js'
       },
       test: {
           src: [
+            'javascripts/vendor/modernizr/modernizr.js',
+            'javascripts/vendor/fastclick/lib/fastclick.js',
             'javascripts/vendor/jquery/jquery.min.js',
+            'javascripts/vendor/jquery-placeholder/jquery.placeholder.js',
+            'javascripts/vendor/jquery.cookie/jquery.cookie.js',
             'javascripts/vendor/handlebars/handlebars.js',
-            'javascripts/vendor/ember/ember.js',
+            'javascripts/vendor/ember/ember.min.js',
+            'javascripts/vendor/ember-data/ember-data.js',
+            'javascripts/vendor/ember-data-django-rest-adapter/build/ember-data-django-rest-adapter.js',
             'javascripts/lib/loader.js',
             'javascripts/lib/ember-resolver.js',
+            'javascripts/vendor/foundation/js/foundation.js',    
+            'javascripts/vendor/foundation/js/foundation.*.js',
             'javascripts/dist/transpiled/app/**/*.js',
-            'javascripts/dist/tmpl.min.js',
+            'javascripts/dist/tmpl.min.js'],
             'javascripts/dist/transpiled/tests/**/*.js',
             'javascripts/lib/test-loader.js'],
           dest: 'javascripts/dist/deps.min.js'

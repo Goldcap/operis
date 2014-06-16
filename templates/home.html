@@ -1,39 +1,22 @@
 {% extends "base.html" %}
 
-{% block javascripts_foot %}
-    {{ block.super }}
-    
-    <script src="javascripts/vendor/ember-1.0.0/libs/handlebars-1.0.0.js"></script>
-    <script src="javascripts/vendor/ember-1.0.0/libs/ember-1.0.0.js"></script>
-    <script src="javascripts/vendor/ember-1.0.0/libs/ember-data.js"></script>
-    <script src="javascripts/vendor/django-rest-adapter.js"></script>
-    <!--<script src="http://dev.operis.com:8050/static/script/vendor/adapter.js"></script>-->
-    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/ember-data-django-rest-adapter/0.13.1/ember-data-django-rest-adapter.js"></script>--> 
-    <script src="javascripts/app.js"></script>
-    
-    
-{% endblock %}
-
 {% block center_column %}
+
     <div class="large-8 columns">
 	
         <h2>Main column content.</h2>
+                
+        <div id="ember-app"></div>
         
-        {% verbatim %}
-        <ul class="button-group">
-          <li>{{#link-to "index" currentWhen="index" classNames="small button"}}List{{/link-to}}</li>
-          <li>{{#link-to "name" currentWhen="name" classNames="small button"}}Name{{/link-to}}</li>
-          <li>{{#link-to "persons" currentWhen="persons" classNames="small button"}}People{{/link-to}}</li>
-          
-        </ul>
+        {% verbatim %} 
+        <script>
+          window.App = require('operis/app')["default"].create();
+        </script>
         {% endverbatim %}
         
-        {% verbatim %}
-        {{outlet}}  
-        {% endverbatim %}
-       
     </div>
 {% endblock %}
+
 
 {% block right_column %}
     <div class="large-4 columns">
@@ -48,54 +31,4 @@
     		<li><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</li>
     	</ul>
     </div>
-{% endblock %}
-
-{% block partials %}
-    {% verbatim %}
-    <script type="text/x-handlebars" data-template-name="index">
-    <ul class="disc">
-        {{#each model}}
-          <li>{{#link-to "detail" this}}{{color}}{{/link-to}}</li>
-        {{/each}}
-    </ul>
-    </script>
-    {% endverbatim %}
-    
-    {% verbatim %}
-    <script type="text/x-handlebars" id="detail">
-    <div>
-         <h1>{{color}}</h1>
-    </div>
-    </script>
-    {% endverbatim %}
-    
-    {% verbatim %}
-    <script type="text/x-handlebars" id="name">
-    <div>
-         <label>Name:</label>
-         {{input type="text" value=name placeholder="Enter your name"}}
-    </div>
-    <div class="text">
-        <div>My name is {{name}} and I want to learn Ember!</div>
-    </div>
-    </script>
-    {% endverbatim %}
-    
-    {% verbatim %}
-    <script type="text/x-handlebars" id="persons">
-    {{#each person in controller}}
-        {{#link-to "person" person}}{{person.first_name}}{{/link-to}}<br />
-    {{/each}}
-    </script>
-    {% endverbatim %}
-    
-    {% verbatim %}
-    <script type="text/x-handlebars" id="person">
-        <strong>{{first_name}}</strong><br />  
-        <strong>{{last_name}}</strong><br />
-        <strong>{{user.username}}</strong><br />
-        <button {{action "kiss"}} class="small">Kiss Me!</button>
-    </script>
-    {% endverbatim %}
-    
 {% endblock %}

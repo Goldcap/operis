@@ -161,21 +161,6 @@ LOGGING = {
     }
 }
 
-NODE_ROOT = join(PROJECT_DIR, '..', 'node_modules')
-HANDLEBARS_PATH = join(NODE_ROOT, 'django-ember-precompile', 'bin', 'django-ember-precompile')
-
-COMPRESS_PRECOMPILERS = (
-    ('text/x-handlebars', '{} {{infile}}'.format(HANDLEBARS_PATH)),
-)
-
-REST_FRAMEWORK = {
-    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    'FILTER_BACKEND': 'rest_framework.filters.DjangoFilterBackend',
-    'PAGINATE_BY': 10,
-    'PAGINATE_BY_PARAM': 'page_size'
-}
-
-
 # Use local settings, if any.
 try:
     from settings_local import *

@@ -1,14 +1,9 @@
-var Person = Ember.Object.extend();
+import User from 'operis/models/user';
 
-Person.reopenClass({
-    people: [],
-    find: function() {
-        var first = Person.create({name: 'toran'});
-        var last = Person.create({name: 'matt'});
-        this.people.pushObject(first);
-        this.people.pushObject(last);
-        return this.people;
-    }
+var Person = DS.Model.extend({
+  first_name: DS.attr('string'),
+  last_name: DS.attr('string'),
+  user: DS.belongsTo('user')
 });
 
 export default Person;

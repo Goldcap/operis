@@ -4,7 +4,7 @@ from rest_framework import serializers
 from example.models import Person
 
 
-class PersonSerializer(serializers.Serializer):
+class PersonSerializer(serializers.ModelSerializer):
     
     id = serializers.Field()  # Note: `Field` is an untyped read-only field.
     first_name = serializers.CharField(required=False,
@@ -36,9 +36,10 @@ class PersonSerializer(serializers.Serializer):
         # Create new instance
         return Person(**attrs)
         
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
+    
     id = serializers.Field()  # Note: `Field` is an untyped read-only field.
     
     class Meta:
         model = User
-        fields = ('id', 'url', 'username', 'email', 'groups')
+        fields = ('id', 'username', 'email')

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html>
+<head><title>Operis Labs</title></head>
+<body>
+
+{% block javascripts_head %}
+    {{ block.super }}
+    
+    <script src='/static/javascripts/dist/deps.min.js'></script>
+    
+{% endblock %}
+
+
+{% block center_column %}
+    <div class="large-8 columns">
+	
+      <h2>Main column content.</h2>
+       
+       
+      {% verbatim %}
+      <script>
+        window.App = require('example/app')["default"].create();
+      </script>
+      {% endverbatim %}
+      
+    </div>
+{% endblock %}
+
+{% block right_column %}
+    <div class="large-4 columns">
+    	<h4>Getting Started</h4>
+    	<p>This is a simple starter kit for Ember.js in Django.</p>
+    
+    	<h4>Other Resources</h4>
+    	<p>Click something to make it change something...</p>
+    	<ul class="disc">
+    		<li><a href="http://foundation.zurb.com/docs">Foundation Documentation</a><br />Everything you need to know about using the framework.</li>
+    		<li><a href="http://github.com/zurb/foundation">Foundation on Github</a><br />Latest code, issue reports, feature requests and more.</li>
+    		<li><a href="http://twitter.com/foundationzurb">@foundationzurb</a><br />Ping us on Twitter if you have questions. If you build something with this we'd love to see it (and send you a totally boss sticker).</li>
+    	</ul>
+    </div>
+{% endblock %}
+
+</body>
+</html>

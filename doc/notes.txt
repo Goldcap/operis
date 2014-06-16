@@ -1,0 +1,13 @@
+Install Notes:
+
+1) Follow ToranB Setup for EAK
+http://toranbillups.com/blog/archive/2014/04/06/Building-your-own-ember-app-kit-lite/
+
+2) Install Django Rest Framework, NO PAGINATION!
+
+3) Install Foundation, with CLI, via Bower
+http://foundation.zurb.com/docs/sass.html
+    a) Change permissions so sudo can modify everything
+    b) Create a new project:
+        foundation new project_name --libsass
+    c) grunt build

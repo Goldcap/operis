@@ -1,0 +1,26 @@
+{
+  "version": "1.0.3",
+  "dependencies": {
+    "grunt": "*",
+    "grunt-karma": "0.7.1",
+    "grunt-cli": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-ember-template-compiler": "1.3.0",
+    "karma-qunit": "*",
+    "karma-qunit-special-blend": "*",
+    "karma": "0.10",
+    "load-grunt-config": "~0.7"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-neuter": "~0.6.0",
+    "grunt-banner": "*",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-text-replace": "~0.3.8",
+    "grunt-bump": "0.0.13",
+    "grunt-contrib-copy": "~0.5.0"
+  }
+}

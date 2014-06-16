@@ -1,8 +1,8 @@
-import Person from 'example/models/person';
+import Person from 'operis/models/person';
 
 var PeopleRoute = Ember.Route.extend({
-    model: function() {
-        return Person.find();
+  model: function() {
+      return this.store.find('person');
     }
 });
 

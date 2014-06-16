@@ -1,7 +1,12 @@
 <table>
-{{#each person in controller}}
 <tr>
-  <td>{{person.name}}</td>
+  <td>This is for my people...</td>
+</tr>
+{{#each person in controller}}
+ <tr>
+  <td>
+        {{#link-to "person" person}}{{person.first_name}}{{/link-to}}
+  </td>
 </tr>
 {{/each}}
 </table>
