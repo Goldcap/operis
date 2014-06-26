@@ -9,4 +9,6 @@ south==0.8.1
 circus
 circus-web
 chaussette
-django-sslify
+django-sslify 
+django-jinja
+rfc3339

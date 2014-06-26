@@ -10,3 +10,27 @@
 </tr>
 {{/each}}
 </table>
+
+Total Results: {{ controller.count }}
+{{# if showPagination}}
+    <ul class="pagination pagination-centered">
+      <li {{bind-attr class="hasPrevious::disabled"}}>
+        <a {{action goToPreviousPage}}>&laquo;</a>
+      </li>
+      {{#if showBeforeEllipsis}}
+        {{pagination-page page=1 currentPage=page}}
+        <li class="disabled"><a>&hellip;</a></li>
+      {{/if}}
+      {{#each pageNumber in visiblePages}}
+        {{pagination-page page=pageNumber currentPage=page}}
+      {{/each}}
+      {{#if showAfterEllipsis}}
+        <li class="disabled"><a>&hellip;</a></li>
+        {{pagination-page page=lastPage currentPage=page}}
+      {{/if}}
+      <li {{bind-attr class="hasNext::disabled"}}>
+        <a {{action goToNextPage}}>
+          &raquo;
+        </a>
+    </ul>
+{{/if}}

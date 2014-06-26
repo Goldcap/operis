@@ -24,7 +24,8 @@ COMPRESS_PRECOMPILERS = (
 
 REST_FRAMEWORK = {
     #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'DEFAULT_PAGINATION_SERIALIZER_CLASS':'api.serializers.CustomPaginationSerializer',
     'FILTER_BACKEND': 'rest_framework.filters.DjangoFilterBackend',
-    #'PAGINATE_BY': 10,
-    #'PAGINATE_BY_PARAM': 'page_size'
+    'PAGINATE_BY': 10,
+    'PAGINATE_BY_PARAM': 'page_size'
 }

@@ -110,7 +110,7 @@ module.exports = function(grunt) {
             'javascripts/vendor/foundation/js/foundation.js',    
             'javascripts/vendor/foundation/js/foundation.*.js',
             'javascripts/dist/transpiled/app/**/*.js',
-            'javascripts/dist/tmpl.min.js'],
+            'javascripts/dist/tmpl.min.js',
             'javascripts/dist/transpiled/tests/**/*.js',
             'javascripts/lib/test-loader.js'],
           dest: 'javascripts/dist/deps.min.js'
