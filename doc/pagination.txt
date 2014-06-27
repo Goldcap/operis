@@ -1,0 +1,7 @@
+Ember Pagination
+http://resistor.io/blog/2013/10/01/simple-pagination-in-ember-arraycontrollers/
+http://discuss.emberjs.com/t/minimal-pagination-example-rails-ember/2224
+http://discuss.emberjs.com/t/pagination-with-ember-data-can-we-agree-on-a-single-solution/742
+
+http://stackoverflow.com/questions/14322945/accessing-meta-information-passed-in-a-json-server-response/14357404#14357404
+http://stackoverflow.com/questions/18325940/ember-js-cant-get-pagination-from-metadata

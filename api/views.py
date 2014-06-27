@@ -15,7 +15,7 @@ class People(generics.ListCreateAPIView):
 class Person(generics.RetrieveUpdateDestroyAPIView):
     model = Person
     serializer_class = PersonSerializer
-    
+    renderer_classes = (EmberJSONRenderer,)
     
 class Users(viewsets.ModelViewSet):
     """
@@ -24,7 +24,10 @@ class Users(viewsets.ModelViewSet):
     model = User
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    renderer_classes = (EmberJSONRenderer,)
     
 class User(generics.RetrieveUpdateDestroyAPIView):
     model = User
     serializer_class = UserSerializer
+    renderer_classes = (EmberJSONRenderer,)
+    

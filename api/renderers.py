@@ -12,16 +12,18 @@ class EmberJSONRenderer(JSONRenderer):
             meta_dict = dict()
         
         resource_name = getattr(renderer_context.get('view').get_serializer().Meta, 'resource_name', 'results')
-        result_name = getattr(renderer_context.get('view').get_serializer().Meta, 'result_name', 'results')
         meta_dict['resource'] = resource_name
         
         try:
-            response_data[result_name] = data['results']
-            response_data['meta'] = dict()
-            # Add custom meta data
-            response_data['meta'].update(meta_dict)
-            response_data['meta'].update(data['meta'])
-            # Call super to render the response
+            if "results" in data:
+                response_data[resource_name] = data['results']
+                response_data['meta'] = dict()
+                # Add custom meta data
+                response_data['meta'].update(meta_dict)
+                response_data['meta'].update(data['meta'])
+                # Call super to render the response
+            else:
+                response_data[result_name] = data
         except KeyError:
             raise ParseError()
             

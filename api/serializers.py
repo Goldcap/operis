@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Group   
+from django.conf import settings   
 from rest_framework import pagination
 from rest_framework import serializers
 from api import fields
@@ -8,7 +9,8 @@ from example.models import Person
 class CustomMetaSerializer(serializers.Serializer):
     count = serializers.Field(source='paginator.count')
     num_pages = serializers.Field(source='paginator.num_pages')
-    current_page = fields.CurrentPageField(source='paginator') 
+    current_page = fields.CurrentPageField(source='paginator')
+    rpp = serializers.Field(source='paginator.per_page')
     
 class CustomPaginationSerializer(pagination.BasePaginationSerializer):
     # Takes the page object as the source
@@ -31,7 +33,6 @@ class PersonSerializer(serializers.ModelSerializer):
         #meta_dict = dict()
         #meta_dict['foo'] = 'bar'
         resource_name = 'people'
-        result_name = 'people'
         fields = ('id', 'first_name', 'last_name', 'user')
         
     def restore_object(self, attrs, instance=None):
@@ -57,8 +58,7 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        resource_name = 'user'
-        result_name = 'results'
+        resource_name = 'users'
         fields = ('id', 'username', 'email')
 
     

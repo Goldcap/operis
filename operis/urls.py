@@ -2,6 +2,9 @@ from django.conf.urls import patterns, include, url
 from django.contrib.auth.models import User, Group
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+admin.autodiscover()
 
 from example.models import Person
 from rest_framework import viewsets, routers
@@ -22,5 +25,5 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
