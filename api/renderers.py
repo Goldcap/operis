@@ -23,7 +23,7 @@ class EmberJSONRenderer(JSONRenderer):
                 response_data['meta'].update(data['meta'])
                 # Call super to render the response
             else:
-                response_data[result_name] = data
+                response_data[resource_name] = data
         except KeyError:
             raise ParseError()
             

@@ -6,7 +6,6 @@ var PaginatableArray = Em.Mixin.create ({
     rpp: 5,
     
     paginate: function() {                                           
-        console.log("Current Page Set To: " + this.get("current_page"));
         this.get('store').find(this.get('model.type'),{page:this.get("current_page")});
     }.observes("current_page"),
     
@@ -16,10 +15,9 @@ var PaginatableArray = Em.Mixin.create ({
         var upperBound = (selectedPage * this.get('rpp'));
         var lowerBound = (selectedPage * this.get('rpp')) - this.get('rpp');
         var models = this.get('content');
-        
-        return models.slice(lowerBound, upperBound);
+        return this.get('store.paged_result');
     
-    }.property('current_page', 'content.@each'),
+    }.property('store.paged_result'),
 
     pagination: function () {
         if (this.get('content.isLoaded')) {
@@ -29,7 +27,6 @@ var PaginatableArray = Em.Mixin.create ({
           this.set('num_pages',metadata.num_pages);
           this.set('current_page',metadata.current_page);
           this.set('rpp',metadata.rpp);
-          console.log(metadata);
           return metadata;
         }      
     }.observes('content.isLoaded')
