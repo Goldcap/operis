@@ -31,9 +31,7 @@ var PaginatableArray = Em.Mixin.create ({
 
     pagination: function () {
         if (this.get('content.isLoaded')) {
-          var store = this.get('store');
-          var modelType = this.get('model.type');
-          var metadata = store.typeMapFor(modelType).metadata;
+          var metadata = this.get('store').typeMapFor(this.get('model.type')).metadata;
           this.set('num_pages',metadata.num_pages);
           this.set('current_page',metadata.current_page);
           this.set('rpp',metadata.rpp);

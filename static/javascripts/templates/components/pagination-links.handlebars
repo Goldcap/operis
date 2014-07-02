@@ -5,15 +5,15 @@
         <a {{action goToPreviousPage}}>&laquo;</a>
       </li>
       {{#if showBeforeEllipsis}}
-        {{pagination-page page=1 currentPage=page}}
+        {{pagination-page page=1 current_page=current_page}}
         <li class="disabled"><a>&hellip;</a></li>
       {{/if}}
       {{#each pageNumber in visiblePages}}
-        {{pagination-page page=pageNumber currentPage=page}}
+        {{pagination-page page=pageNumber current_page=current_page}}
       {{/each}}
       {{#if showAfterEllipsis}}
         <li class="disabled"><a>&hellip;</a></li>
-        {{pagination-page page=lastPage currentPage=page}}
+        {{pagination-page page=lastPage current_page=current_page}}
       {{/if}}
       <li {{bind-attr class="hasNext::disabled"}}>
         <a {{action goToNextPage}}>
