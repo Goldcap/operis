@@ -1,14 +1,15 @@
 var PaginatableArray = Em.Mixin.create ({
   
-    current_page: 1,
+    queryParams: ['page'],
+    page: 1,
     current_results: [],
     num_pages: 1,
     lastPage: 1,
     rpp: 5,
     
     paginate: function() {                                           
-        this.get('store').find(this.get('model.type'),{page:this.get("current_page")});
-    }.observes("current_page"),
+        this.get('store').find(this.get('model.type'),{page:this.get("page")});
+    }.observes("page"),
     
     paginatedContent: function() {
         
@@ -33,7 +34,7 @@ var PaginatableArray = Em.Mixin.create ({
         if (this.get('content.isLoaded')) {
           var metadata = this.get('store').typeMapFor(this.get('model.type')).metadata;
           this.set('num_pages',metadata.num_pages);
-          this.set('current_page',metadata.current_page);
+          this.set('page',metadata.current_page);
           this.set('rpp',metadata.rpp);
           return metadata;
         }      

@@ -2,11 +2,14 @@
   "name": "operis-configuration",
   "version": "0.0.1",
   "dependencies": {
-    "jquery": "1.9.1",
+    "jquery": "2.1.0",
     "handlebars": "1.2.1",
-    "ember": "1.5.0",
+    "ember": "http://builds.emberjs.com/canary/ember.js",
     "ember-data": "1.0.0-beta.8",
     "ember-data-django-rest-adapter": "~1.0.3",
     "foundation": "5.2.3"
+  },
+  "resolutions": {
+    "ember": "~1.6.0-beta.5"
   }
 }

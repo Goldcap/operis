@@ -1,12 +1,12 @@
 var PaginationLinks = Ember.Component.extend({
     
     hasPrevious: function() {
-        if (this.get('current_page') > 1) return true;
-    }.property('current_page'),
+        if (this.get('page') > 1) return true;
+    }.property('page'),
     
     hasNext: function() {
-        if (this.get('current_page') + 1 < this.get('num_pages')) return true;
-    }.property('current_page', 'num_pages'),
+        if (this.get('page') + 1 < this.get('num_pages')) return true;
+    }.property('page', 'num_pages'),
     
     showPagination: Em.computed.gt('num_pages', 1),
      
@@ -26,8 +26,8 @@ var PaginationLinks = Ember.Component.extend({
       
     visiblePages: function() {
         var num_pages = this.get('num_pages');
-        var current_page  = this.get('current_page');
-    
+        var page  = this.get('page');
+        
         // limit the number of pages to five, or the number of pages
         // if that is smaller.
         var limit = 5;
@@ -36,7 +36,7 @@ var PaginationLinks = Ember.Component.extend({
         }
         
         // start at page - half the limit
-        var astart = current_page - parseInt(limit / 2);
+        var astart = page - parseInt(limit / 2);
         
         // if that puts the last page shown as greater than the number
         // of pages, then move it back to the first start point that
@@ -58,24 +58,25 @@ var PaginationLinks = Ember.Component.extend({
         }
         return _results;
         
-    }.property('current_page', 'num_pages'),
+    }.property('page', 'num_pages'),
     
     actions: {
         goToNextPage: function(){
             if (this.get('hasNext')) {
-                this.incrementProperty('controller.current_page');
+                this.incrementProperty('controller.page');
             }
         },
     
         goToPreviousPage: function(){
             if (this.get('hasPrevious')) {
-                this.decrementProperty('controller.current_page');
+                this.decrementProperty('controller.page');
             }
         },
         
+        //Deprecated? Not sure we need this...
         goToPage: function(pageNumber) {
             if ((pageNumber >= 1) && (pageNumber <= this.get('lastPage'))) {
-                this.set('controller.current_page', pageNumber);
+                this.set('controller.page', pageNumber);
             }
         }
     }

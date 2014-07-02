@@ -1,1 +1,2 @@
-<a {{action pageClicked}}>{{page}}</a>
+{{#link-to 'people.index' (query-params page=page_number)}}{{page_number}}{{/link-to}}
+<!--<a {{action pageClicked}}>{{page_number}}</a>-->

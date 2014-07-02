@@ -21,6 +21,11 @@
     {% endblock %}
     
     {% block javascripts_head %}
+    <script>
+    ENV = {
+      ENABLE_ALL_FEATURES: true
+    };
+    </script>
     <script src='/static/javascripts/dist/deps.min.js'></script> 
     {% endblock %}
 

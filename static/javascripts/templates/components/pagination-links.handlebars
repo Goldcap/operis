@@ -1,19 +1,18 @@
-<h2>PAGINATION</h2>
 {{# if showPagination}}
     <ul class="pagination pagination-centered">
       <li {{bind-attr class="hasPrevious::disabled"}}>
         <a {{action goToPreviousPage}}>&laquo;</a>
       </li>
       {{#if showBeforeEllipsis}}
-        {{pagination-page page=1 current_page=current_page}}
+        {{pagination-page page_number=1 page=page}}
         <li class="disabled"><a>&hellip;</a></li>
       {{/if}}
-      {{#each pageNumber in visiblePages}}
-        {{pagination-page page=pageNumber current_page=current_page}}
+      {{#each page_number in visiblePages}}
+        {{pagination-page page_number=page_number page=page}}
       {{/each}}
       {{#if showAfterEllipsis}}
         <li class="disabled"><a>&hellip;</a></li>
-        {{pagination-page page=lastPage current_page=current_page}}
+        {{pagination-page page_number=page_number page=page}}
       {{/if}}
       <li {{bind-attr class="hasNext::disabled"}}>
         <a {{action goToNextPage}}>
