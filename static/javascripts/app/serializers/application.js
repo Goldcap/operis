@@ -4,6 +4,7 @@ var AppSerializer = DS.RESTSerializer.extend({
     extractArray: function(store, primaryType, payload) {
         payload = this._super(store, primaryType, payload);
         this.set('store.paged_result',payload);
+        this.set('store.paged_ids',this.get('store.paged_result').mapBy('id'));
         return payload;
     }
          

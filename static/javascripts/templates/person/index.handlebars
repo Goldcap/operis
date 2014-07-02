@@ -1,0 +1,6 @@
+{{#form-for model}}
+  {{input first_name placeholder="Enter your NEW first name"}}
+  {{input last_name placeholder="Enter your NEW last name"}}  
+  {{input user.username label="Username" placeholder="Your OLDER username"}}
+  <button {{action "updatePerson" model}} class="small">Save</button>
+{{/form-for}}
