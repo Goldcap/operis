@@ -19,8 +19,7 @@ var PaginatableArray = Em.Mixin.create ({
             //Let's be careful to make sure we return __something__
             var ds_item = scope.findBy('id',item.id.toString());
             if (ds_item) {
-                scope.get('current_results').push(item);
-                //scope.get('current_results').push(ds_item);    
+                scope.get('current_results').push(ds_item);    
             } else {                 
                 scope.get('current_results').push(item);
             }
