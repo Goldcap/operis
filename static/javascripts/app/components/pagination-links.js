@@ -71,13 +71,6 @@ var PaginationLinks = Ember.Component.extend({
             if (this.get('hasPrevious')) {
                 this.decrementProperty('controller.page');
             }
-        },
-        
-        //Deprecated? Not sure we need this...
-        goToPage: function(pageNumber) {
-            if ((pageNumber >= 1) && (pageNumber <= this.get('lastPage'))) {
-                this.set('controller.page', pageNumber);
-            }
         }
     }
       

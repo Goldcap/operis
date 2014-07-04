@@ -3,7 +3,7 @@ import Person from 'operis/models/person';
 var PeopleRoute = Ember.Route.extend({
   queryParams: {
     page: {
-      refreshModel: true
+      //refreshModel: true
     }
   },
   model: function( params ) {

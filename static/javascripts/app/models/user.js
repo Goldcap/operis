@@ -1,7 +1,5 @@
-var User = DS.Model.extend({
-    username: DS.attr('string'),
-    email: DS.attr('string'),
-    aliases: DS.hasMany('person', { async: true})
-});
+import OperisUser from 'operis/models/operis-user';
+
+var User = OperisUser.extend({});
 
 export default User;
