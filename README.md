@@ -1,7 +1,8 @@
 Operis
 ======
 
-Multi JS MVC Implementation for Django
+Ember Implementation for Django with Ember App Kit and Django Rest Framework.
+
 
 ##CSS Framework
 We're using foundation, via SCSS, so to install, follow the instructions here:
@@ -16,6 +17,13 @@ compass create static -r zurb-foundation --using foundation --force
 
 Then to keep up with modifications, you can run (in a separate CLI):
 compass watch
+
+##Django Rest Framework
+Using a custom renderer and serializer, we come very close to a native Ember Data syntax.
+But there are a few minor adjustments to the Ember Data adapter and serializers.
+
+##Ember Data Pagination
+We're using the canary build of Ember to enable query-params for pagination. 
 
 ##Ember Scaffold Generator
 
