@@ -19,3 +19,17 @@ compass watch
 
 ##Upcoming Integrations
 https://github.com/marcgibbons/django-rest-swagger
+
+To generate Ember Scaffolding, 
+
+```python
+python manage.py generate
+```
+
+In your model, create an Ember class, as so:
+
+```python
+class Ember:
+    index_list = ['id','FirstName','LastName']
+    fields = ['FirstName','LastName','Company','Address','City','State','Zip','Telephone']
+```
