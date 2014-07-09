@@ -17,8 +17,9 @@ compass create static -r zurb-foundation --using foundation --force
 Then to keep up with modifications, you can run (in a separate CLI):
 compass watch
 
-##Upcoming Integrations
-https://github.com/marcgibbons/django-rest-swagger
+##Ember Scaffold Generator
+
+Ember is integrated with the EAK, we'll be migrating to Ember CLI soon.
 
 To generate Ember Scaffolding, 
 
@@ -33,3 +34,12 @@ class Ember:
     index_list = ['id','FirstName','LastName']
     fields = ['FirstName','LastName','Company','Address','City','State','Zip','Telephone']
 ```
+
+Then from cli in the "static" directory, 
+
+```javascript
+grunt local
+```
+
+##Upcoming Integrations
+https://github.com/marcgibbons/django-rest-swagger
