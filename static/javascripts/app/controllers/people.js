@@ -1,5 +1,5 @@
-import PaginatableArray from 'operis/mixins/paginatable_array';
+import OperisPeopleController from 'operis/controllers/operis-people';
 
-var PeopleController = Ember.ArrayController.extend( PaginatableArray, {});
+var PeopleController = OperisPeopleController.extend({});
 
 export default PeopleController;  

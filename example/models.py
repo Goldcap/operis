@@ -25,6 +25,13 @@ class Person(models.Model):
     Twitter = models.CharField(max_length=300, blank=True, null=True)
     DateSubmitted = models.DateTimeField(blank=True, null=True)
     
+    class Meta:
+        verbose_name_plural = "People"
+        
+    class Ember:
+        index_list = ['id','FirstName','LastName']
+        fields = ['FirstName','LastName','Company','Address','City','State','Zip','Telephone']
+        
     def __str__(self):
         return "%s %s" % (self.FirstName, self.LastName)
     

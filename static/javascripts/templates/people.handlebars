@@ -1,14 +1,26 @@
 <table>
-<tr>
-  <td>This is for my people...</td>
+<thead>
+ <tr><td>
+        id
+  </td><td>
+        First Name
+  </td><td>
+        Last Name
+  </td>
 </tr>
+</thead>
+<tbody>
 {{#each person in controller.paginatedContent}}
- <tr>
-  <td>
+ <tr><td>
+        {{#link-to "person" person}}{{person.id}}{{/link-to}}
+  </td><td>
         {{#link-to "person" person}}{{person.first_name}}{{/link-to}}
+  </td><td>
+        {{#link-to "person" person}}{{person.last_name}}{{/link-to}}
   </td>
 </tr>
 {{/each}}
+</tbody>
 </table>
 
 {{pagination-links page=page num_pages=num_pages}}

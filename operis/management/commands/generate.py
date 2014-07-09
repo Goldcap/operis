@@ -1,14 +1,18 @@
-import datetime
+import datetime                         
+import sys
+from inspect import getmembers, isclass
 from collections import defaultdict
 
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
+from django.db.models.base import ModelBase
 
 from jinja2 import FileSystemLoader, Environment, PackageLoader, ChoiceLoader
 
-from example.models import Person                                            
+from example import models
 from operis.log import log
+from operis.utils import convert, convert_friendly
 
 #This command takes an input table of artifacts, of a specific format,
 #And ensures that image attatchments for each artifact in the table are created
@@ -22,42 +26,115 @@ class Command(BaseCommand):
         
         self.logger = log( self )
         
-        models = defaultdict(list)
-        model = []
-        for f in Person._meta.fields:
-            field = {}
-            field['name'] = f.name
-            field['type'] = f.get_internal_type()
-            self.logger.log("Field %s",[f.name],"info")
-            self.logger.log("Field %s",[field['type']],"info")
-            model.append(field)
-            # resolve picklists/choices, with get_xyz_display() function
-        models["Person"] = model
-        #print models        
-    
+        model_instances = defaultdict(list)
+        for name, obj in getmembers(models):
+            if isclass(obj):
+                model = []
+                if isinstance(obj, ModelBase):
+                    self.logger.log("Object Name is: %s",[obj.__name__],"info")
+                    for f in obj._meta.fields:
+                        if hasattr(obj ,"Ember") and hasattr(obj.Ember,'fields'):
+                            if f.name not in obj.Ember.fields:
+                                continue
+                        field = {}
+                        field['name'] = convert(f.name) 
+                        field['name_friendly'] = convert_friendly(f.name)
+                        field['type'] = f.get_internal_type()
+                        #self.logger.log("Field %s",[f.name],"info")
+                        #self.logger.log("Field %s",[field['type']],"info")
+                        model.append(field)
+                        # resolve picklists/choices, with get_xyz_display() function
+                            
+                    index_list = ['id']
+                    index_converted = []
+                    plural = None
+                    plural_converted = None
+                    #Add to our Plural-Item Controllers
+                    if hasattr(obj ,"Ember"):
+                        if hasattr(obj.Ember,'index_list'):
+                            index_list = []
+                            for f in obj.Ember.index_list:
+                                index_list.append(convert(f))
+                                index_converted.append(convert_friendly(f))
+                                # resolve picklists/choices, with get_xyz_display() function
+                           
+                    if hasattr(obj._meta ,"verbose_name_plural"):
+                        plural = unicode(obj._meta.verbose_name_plural)
+                  
+                    print index_converted    
+                    item = {    "model": model, 
+                                "singular": unicode(obj.__name__).title(), 
+                                "singular_converted": convert(unicode(obj.__name__)),
+                                "plural": plural.title(),
+                                "plural_converted": convert(plural),
+                                "index_list": index_list,
+                                "index_converted": index_converted
+                            }
+                    model_instances[obj.__name__] = item
+        
         global_exts = getattr(settings, 'JINJA_EXTS', ())
         env = Environment(extensions=global_exts,loader=FileSystemLoader('templates'))
-        for k,v in models.iteritems():
+        for k,v in model_instances.iteritems():
+            
+            self.logger.log("Creating model for %s",[k],"info")
             template = env.get_template('ember/models/model.js')
-            args = {"type":k,"model":v}
+            args = {"model":v}
             output = template.render(args)
-            print output
-
-        #self.logger.log("HOWDY %s",["Folks"],"info")
+            file = open(settings.STATIC_ROOT + "/javascripts/app/models/operis-" + v["singular_converted"] + ".js", "w")
+            file.write(output)
+            file.close()
         
-        """
-        for field in ArtifactField.objects.all():
-            self.logger.log("FIELD IS %s",[field],"info")
+            self.logger.log("Creating Single Instance Controller for %s",[k],"info")
+            template = env.get_template('ember/controllers/single.js')
+            args = {"model":v}
+            output = template.render(args)
+            file = open(settings.STATIC_ROOT + "/javascripts/app/controllers/operis-" + v["singular_converted"] + ".js", "w")
+            file.write(output)
+            file.close()
+            
+            self.logger.log("Creating Single Instance Route for %s",[k],"info")
+            template = env.get_template('ember/routes/single.js')
+            args = {"model":v}
+            output = template.render(args)
+            file = open(settings.STATIC_ROOT + "/javascripts/app/routes/operis-" + v["singular_converted"] + ".js", "w")
+            file.write(output)
+            file.close()
+            
+            self.logger.log("Creating Single Template for %s",[k],"info")
+            template = env.get_template('ember/templates/single.handlebars')
+            args = {"model":v}
+            output = template.render(args)
+            file = open(settings.STATIC_ROOT + "/javascripts/templates/" + v["singular_converted"] + ".handlebars", "w")
+            file.write(output)
+            file.close()
+            
+            if v["plural"]: 
+                
+                self.logger.log("Creating Plural Instance Controller for %s",[k],"info")
+                template = env.get_template('ember/controllers/plural.js')
+                args = {"model":v}
+                output = template.render(args)
+                file = open(settings.STATIC_ROOT + "/javascripts/app/controllers/operis-" + v["plural_converted"] + ".js", "w")
+                file.write(output)
+                file.close()
+                
+                self.logger.log("Creating Plural Instance Route for %s",[k],"info")
+                template = env.get_template('ember/routes/plural.js')
+                args = {"model":v}
+                output = template.render(args)
+                file = open(settings.STATIC_ROOT + "/javascripts/app/routes/operis-" + v["plural_converted"] + ".js", "w")
+                file.write(output)
+                file.close()
+                
+                self.logger.log("Creating Pllural Template for %s",[k],"info")
+                template = env.get_template('ember/templates/plural.handlebars')
+                args = {"model":v}
+                output = template.render(args)
+                file = open(settings.STATIC_ROOT + "/javascripts/templates/" + v["plural_converted"] + ".handlebars", "w")
+                file.write(output)
+                file.close()
+                
+                
+            
+        self.logger.log("Done, templates are in %s",[settings.STATIC_ROOT],"info")
         
-            obj,created = Permission.objects.get_or_create(
-                                    permission = 'r',
-                                    user_id = '-1',
-                                    parent_user_id = 0,
-                                    active = 1,
-                                    content_type = ContentType.objects.get_for_model(field),
-                                    object_id = field.id,
-                                    parent_content_type = ContentType.objects.get(pk=22),
-                                    parent_object_id = 0)
-            obj.created = datetime.datetime.now()
-            obj.save()
-        """
