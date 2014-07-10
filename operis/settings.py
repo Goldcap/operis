@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'south',
     'rest_framework',
     'django_jinja',
+    'autocomplete_light'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

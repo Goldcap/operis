@@ -1,30 +1,29 @@
-import OperisPersonController from 'operis/controllers/operis-person';
-
-var PersonController = OperisPersonController.extend({
-   
+var Autocomplete = Ember.Component.extend({
+    
     searchText: null,
-   
+        
     searchResults: function() {
         var st = this.get("searchText");
         if (! st) return;
-        return this.store.find('person', { first_name: st });
         
-        /*
         var regex = new RegExp(st,'i');
         return ['one','two','three'].filter(function(name) {
             return name.match(regex);
         });
-        */
         
     }.property('searchText'),
     
+    
     actions: {
+        showConfirmation: function() {
+            this.toggleProperty('isShowingConfirmation'); 
+        },
         
-        kiss: function() {
-            alert("Mwa! We love " + this.get('content.first_name') + "!");
+        confirm: function() {
+            this.toggleProperty('isShowingConfirmation');
+            //this.sendAction('action', this.get('param'));
         }
-   }
-   
+    }  
 });
 
-export default PersonController;
+export default Autocomplete;

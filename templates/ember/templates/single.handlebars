@@ -1,0 +1,8 @@
+{% raw %}{{{% endraw %}#form-for model{% raw %}}}{% endraw %}
+  {%- for field in model.model %} 
+  {%- if field.type != "ForeignKey" %}
+  {% raw %}{{{% endraw %}input {{ field.name }} placeholder="Enter your {{ field.name_friendly }}"{% raw %}}}{% endraw %}
+  {%- endif %}
+  {%- endfor %}
+  <button {% raw %}{{{% endraw %}action "submit" model{% raw %}}}{% endraw %} class="small">Save</button>
+{% raw %}{{{% endraw %}/form-for{% raw %}}}{% endraw %}

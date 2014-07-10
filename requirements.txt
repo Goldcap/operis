@@ -12,3 +12,4 @@ chaussette
 django-sslify 
 django-jinja
 rfc3339
+django-autocomplete-light

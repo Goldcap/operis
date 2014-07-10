@@ -9,3 +9,12 @@
   {{input telephone placeholder="Enter your Telephone"}}
   <button {{action "submit" model}} class="small">Save</button>
 {{/form-for}}
+
+
+{{ input type="text" value=searchText }}
+
+<ul>
+{{#each searchResults}}
+    <li>{{this.first_name}}</li>
+{{/each}}            
+</ul>

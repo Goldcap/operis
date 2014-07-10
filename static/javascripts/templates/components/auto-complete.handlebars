@@ -1,0 +1,15 @@
+
+{{#if isShowingConfirmation}}
+  <button {{action "confirm"}}>Click again to confirm</button>
+{{else}}
+  <button {{action "showConfirmation"}}>Blubber</button>
+{{/if}}
+
+
+{{ input type="text" value=controller.searchText }}
+
+<ul>
+{{#each controller.searchResults}}
+    <li>{{this}}</li>
+{{/each}}            
+</ul>

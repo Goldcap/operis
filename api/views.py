@@ -9,7 +9,7 @@ from api.renderers import EmberJSONRenderer
 class People(generics.ListCreateAPIView):
     model = Person
     serializer_class = PersonSerializer
-    filter_fields = ['FirstName','LastName']
+    filter_fields = ['first_name','last_name']
     renderer_classes = (EmberJSONRenderer,)
     
 class Person(generics.RetrieveUpdateDestroyAPIView):

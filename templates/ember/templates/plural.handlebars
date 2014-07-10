@@ -1,0 +1,24 @@
+<table>
+<thead>
+ <tr>
+  {%- for field in model.index_converted -%}
+  <td>
+        {{field}}
+  </td>
+  {%- endfor %}
+</tr>
+</thead>
+<tbody>
+{% raw %}{{{% endraw %}#each {{ model.singular_converted }} in controller.paginatedContent{% raw %}}}{% endraw %}
+ <tr>
+  {%- for field in model.index_list -%}
+  <td>
+        {% raw %}{{{% endraw %}#link-to "{{ model.singular_converted }}" {{ model.singular_converted }}{% raw %}}}{% endraw %}{% raw %}{{{% endraw %}{{ model.singular_converted}}.{{field}}{% raw %}}}{% endraw %}{% raw %}{{{% endraw %}/link-to{% raw %}}}{% endraw %}
+  </td>
+  {%- endfor %}
+</tr>
+{% raw %}{{{% endraw %}/each{% raw %}}}{% endraw %}
+</tbody>
+</table>
+
+{% raw %}{{{% endraw %}pagination-links page=page num_pages=num_pages{% raw %}}}{% endraw %}
