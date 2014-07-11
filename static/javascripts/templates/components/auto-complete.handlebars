@@ -1,15 +1,7 @@
-
-{{#if isShowingConfirmation}}
-  <button {{action "confirm"}}>Click again to confirm</button>
-{{else}}
-  <button {{action "showConfirmation"}}>Blubber</button>
-{{/if}}
-
-
-{{ input type="text" value=controller.searchText }}
+{{ input first_name type="text" value=searchText placeholder=placeholder }}
 
 <ul>
-{{#each controller.searchResults}}
-    <li>{{this}}</li>
+{{#each searchResults}}
+    <li>{{this.display}}</li>
 {{/each}}            
 </ul>

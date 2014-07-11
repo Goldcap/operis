@@ -7,7 +7,8 @@
     "ember": "http://builds.emberjs.com/canary/ember.js",
     "ember-data": "1.0.0-beta.8",
     "ember-data-django-rest-adapter": "~1.0.3",
-    "foundation": "5.2.3"
+    "foundation": "5.2.3",
+    "sprintf": "1.0.0"
   },
   "resolutions": {
     "ember": "~1.6.0-beta.5"

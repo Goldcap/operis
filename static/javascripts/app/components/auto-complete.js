@@ -1,29 +1,41 @@
 var Autocomplete = Ember.Component.extend({
     
     searchText: null,
-        
-    searchResults: function() {
+   
+    fetchResults: function() {
         var st = this.get("searchText");
-        if (! st) return;
+        if (! st) {
+            console.log("NO!");
+            this.set('searchResults',[]);
+            return;    
+        }
         
-        var regex = new RegExp(st,'i');
-        return ['one','two','three'].filter(function(name) {
-            return name.match(regex);
+        var parent = this.get('parent');
+        var model = parent.get('model');
+        var store = parent.get('store');
+        
+        var params = this.get('params').split(",");
+        var format = this.get('format');
+        
+        //console.log(vsprintf(format, params));
+        //console.log(params);
+        
+        var scope = this;
+        store.find(model.get('constructor.typeKey'), {"search":st} ).then(function(response) {
+            response.content.forEach(function(item, index) {   
+              var data = Array();
+              params.forEach(function(param, pi){
+                data.push(item.get(param));
+                //console.log(param);
+              });
+            
+              item.set('display',Ember.String.htmlSafe(vsprintf(format,data)));
+            });
+            scope.set('searchResults',response.content);
         });
         
-    }.property('searchText'),
+    }.observes('searchText')
     
-    
-    actions: {
-        showConfirmation: function() {
-            this.toggleProperty('isShowingConfirmation'); 
-        },
-        
-        confirm: function() {
-            this.toggleProperty('isShowingConfirmation');
-            //this.sendAction('action', this.get('param'));
-        }
-    }  
 });
 
 export default Autocomplete;

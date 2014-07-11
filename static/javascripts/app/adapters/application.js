@@ -18,9 +18,8 @@ var AppAdapter = DS.RESTAdapter.extend({
 
         var id = Em.get(record, 'id');
         return this.ajax(this.buildURL(type.typeKey, id), "PUT", { data: data[type.typeKey] });
-      },
-    
+      }
+      
 });
-//var AppAdapter = DS.DjangoRESTAdapter.extend({namespace: 'api'});
 
 export default AppAdapter;

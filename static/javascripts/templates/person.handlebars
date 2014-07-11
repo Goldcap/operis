@@ -1,5 +1,5 @@
 {{#form-for model}}
-  {{input first_name placeholder="Enter your First Name"}}
+  {{auto-complete parent=this model=model params="first_name,last_name" placeholder="Enter your First Name" format="<span style='color: red'><img src='http://lorempixel.com/output/cats-q-c-20-20-9.jpg'>&nbsp;&raquo;&nbsp;%s %s</span>"}}
   {{input last_name placeholder="Enter your Last Name"}}
   {{input company placeholder="Enter your Company"}}
   {{input address placeholder="Enter your Address"}}
@@ -9,12 +9,3 @@
   {{input telephone placeholder="Enter your Telephone"}}
   <button {{action "submit" model}} class="small">Save</button>
 {{/form-for}}
-
-
-{{ input type="text" value=searchText }}
-
-<ul>
-{{#each searchResults}}
-    <li>{{this.first_name}}</li>
-{{/each}}            
-</ul>
