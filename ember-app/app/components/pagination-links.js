@@ -7,7 +7,7 @@ var PaginationLinks = Ember.Component.extend({
     }.property('page'),
     
     hasNext: function() {
-        if (this.get('page') + 1 < this.get('num_pages')) { return true; }
+        if (this.get('page') < this.get('num_pages')) { return true; }
     }.property('page', 'num_pages'),
     
     showPagination: Ember.computed.gt('num_pages', 1),

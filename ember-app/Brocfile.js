@@ -22,4 +22,25 @@ app.import('vendor/ember-validations/dist/ember-validations.min.js');
 app.import('vendor/csrf.js'); 
 app.import('vendor/sprintf/dist/sprintf.min.js'); 
 
-module.exports = app.toTree();
+// Import a couple of modules;
+var mergeTrees  = require('broccoli-merge-trees');
+var compileSass = require('broccoli-sass');
+
+// List all of the directories containing SASS source files
+var sassSources = [
+  'app/styles',
+  'vendor/foundation/scss'
+]
+
+// Compile a custom sass file, with the sources that need to be included
+var appCss = compileSass( sassSources , 'app_custom.scss', 'assets/app.css');
+
+// Merge the ember app and the custom css into a single tree for export
+var appAndCustomDependencies = mergeTrees([app.toTree(),appCss], {
+  overwrite: true
+});
+
+// EXPORT ALL THE THINGS!
+module.exports = appAndCustomDependencies;
+
+//module.exports = app.toTree();

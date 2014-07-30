@@ -14,24 +14,24 @@
     <title>Operis</title>
     {% endblock %}
     
-    {{BASE_TAG}}
+    <base href="/" />
     
     <link rel="shortcut icon" href="http://dev.operis.com/favicon.ico" type="image/x-icon" />
     
     {% block stylesheets_head %}
-    <link rel="stylesheet" href="/assets/vendor.css">
-    <link rel="stylesheet" href="/assets/ember-app.css">
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/ember-app.css">
+    <link rel="stylesheet" href="assets/app.css">
     {% endblock %}
     
     {% block javascripts_head %}
-    <script>
-        window.EmberAppENV = {"ENABLE_ALL_FEATURES": true,"environment":"development","baseURL":"/","locationType":"auto","EmberENV":{"FEATURES":{}},"APP":{"LOG_ACTIVE_GENERATION":true,"LOG_VIEW_LOOKUPS":true}};
-        window.EmberENV = window.EmberAppENV.EmberENV;
-    </script>
-    
-    <script src="/assets/vendor.js"></script>
-    <script src="/assets/ember-app.js"></script>
-    
+        <script>
+          window.EmberAppENV = {{ settings.ember_env }};
+          window.EmberENV = window.EmberAppENV.EmberENV;
+        </script>
+        <script src="assets/vendor.js"></script>
+        <script src="assets/ember-app.js"></script>
+        
     {% endblock %}
 
 </head>
@@ -140,7 +140,11 @@
   {% block partials %}{% endblock %}  
   
   {% block javascripts_foot %}
-    
-    {% endblock %}
+    {% verbatim %} 
+    <script type="text/javascript">//<![CDATA[
+    document.write('<script src="' + (location.protocol || 'http:') + '//' + (location.hostname || 'localhost') + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>')
+    //]]></script>
+    {% endverbatim %}
+  {% endblock %}
 </body>
 </html>
