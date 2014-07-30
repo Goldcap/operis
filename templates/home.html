@@ -8,11 +8,9 @@
                 
         <div id="ember-app"></div>
         
-        {% verbatim %} 
         <script>
-            window.EmberApp = require('ember-app/app')['default'].create(EmberAppENV.APP);
-        </script>                
-        {% endverbatim %}
+            window.EmberApp = require('{{ settings.ember_app_name }}/app')['default'].create(EmberAppENV.APP);
+        </script>         
         
     </div>
 {% endblock %}
