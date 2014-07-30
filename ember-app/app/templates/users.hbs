@@ -1,0 +1,16 @@
+<table>
+<thead>
+ <tr>
+</tr>
+</thead>
+<tbody>
+{{#each user in controller.paginatedContent}}
+ <tr><td>
+        {{#link-to "user" user}}{{user.id}}{{/link-to}}
+  </td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+{{pagination-links page=page num_pages=num_pages}}

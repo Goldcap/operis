@@ -1,0 +1,12 @@
+{{#form-for model}}
+  {{autocomplete first_name placeholder="Enter your First Name" params="first_name,last_name" format="<span style='color: red'><img src='http://lorempixel.com/output/cats-q-c-20-20-1.jpg'>&nbsp;&raquo;&nbsp;%s %s</span>" }}
+  {{input last_name placeholder="Enter your Last Name"}}
+  {{input company placeholder="Enter your Company"}}
+  {{input address placeholder="Enter your Address"}}
+  {{input city placeholder="Enter your City"}}
+  {{input state placeholder="Enter your State"}}
+  {{input zip placeholder="Enter your Zip"}}
+  {{input telephone placeholder="Enter your Telephone"}}
+  <button {{action "submit" model}} class="small">Save</button>
+{{/form-for}}
+  
