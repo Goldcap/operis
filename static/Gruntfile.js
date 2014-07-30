@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         livereload: true
       },
       sources: {
-        files: ['javascripts/templates/**/*.handlebars', 'javascripts/app/**/*.js'],
+        files: ['javascripts/templates/**/*.handlebars', 'javascripts/app/**/*.js', 'javascripts/vendor/ember-easyForm/dist/ember-easyForm.js' ],
         tasks: ['dev']
       }
     },

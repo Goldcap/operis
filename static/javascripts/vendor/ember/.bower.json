@@ -1,14 +1,21 @@
 {
   "name": "ember",
-  "_cacheHeaders": {
-    "ETag": "\"fa6edf37b454996a85418e5b49fd0b27\"",
-    "Last-Modified": "Mon, 30 Jun 2014 21:35:44 GMT",
-    "Content-Length": "1551599",
-    "Content-Type": "text/javascript"
+  "version": "1.6.1",
+  "main": [
+    "./ember.js"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.7.0 <= 2.1.0",
+    "handlebars": ">= 1.0.0 < 2.0.0"
   },
-  "_release": "e-tag:fa6edf37b",
-  "main": "index.js",
-  "_source": "http://builds.emberjs.com/canary/ember.js",
-  "_target": "*",
-  "_originalSource": "http://builds.emberjs.com/canary/ember.js"
+  "homepage": "https://github.com/components/ember",
+  "_release": "1.6.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.6.1",
+    "commit": "2b60cf16f0476b08c5f5040dac1d252cd3cb84ea"
+  },
+  "_source": "git://github.com/components/ember.git",
+  "_target": "1.6.1",
+  "_originalSource": "ember"
 }

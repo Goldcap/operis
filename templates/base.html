@@ -14,6 +14,8 @@
     <title>Operis</title>
     {% endblock %}
     
+    {{BASE_TAG}}
+    
     <link rel="shortcut icon" href="http://dev.operis.com/favicon.ico" type="image/x-icon" />
     
     {% block stylesheets_head %}
@@ -22,11 +24,13 @@
     
     {% block javascripts_head %}
     <script>
-    ENV = {
-      ENABLE_ALL_FEATURES: true
-    };
+        window.EmberAppENV = {"ENABLE_ALL_FEATURES": true,"environment":"development","baseURL":"/","locationType":"auto","EmberENV":{"FEATURES":{}},"APP":{"LOG_ACTIVE_GENERATION":true,"LOG_VIEW_LOOKUPS":true}};
+        window.EmberENV = window.EmberAppENV.EmberENV;
     </script>
-    <script src='/static/javascripts/dist/deps.min.js'></script> 
+    
+    <script src="/assets/vendor.js"></script>
+    <script src="/assets/ember-app.js"></script>
+    
     {% endblock %}
 
 </head>
