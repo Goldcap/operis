@@ -1,3 +1,6 @@
+import Ember from 'ember';
+import DS from "ember-data";
+
 var Operis{{ model.singular }} = DS.Model.extend(Ember.Validations.Mixin,{
   {%- for field in model.model -%} 
   {%- if field.type == "BooleanField" %}

@@ -61,7 +61,6 @@ class Command(BaseCommand):
                     if hasattr(obj._meta ,"verbose_name_plural"):
                         plural = unicode(obj._meta.verbose_name_plural)
                   
-                    print index_converted    
                     item = {    "model": model, 
                                 "singular": unicode(obj.__name__).title(), 
                                 "singular_converted": convert(unicode(obj.__name__)),
@@ -71,40 +70,44 @@ class Command(BaseCommand):
                                 "index_converted": index_converted
                             }
                     model_instances[obj.__name__] = item
+                    print obj.__name__
         
         global_exts = getattr(settings, 'JINJA_EXTS', ())
         env = Environment(extensions=global_exts,loader=FileSystemLoader('templates'))
+        
+        self.logger.log("Directory is %s",[settings.PROJECT_DIR + "../" + settings.EMBER_APP_NAME],"info")
+        
         for k,v in model_instances.iteritems():
             
             self.logger.log("Creating model for %s",[k],"info")
             template = env.get_template('ember/models/model.js')
-            args = {"model":v}
+            args = {"model":v,"ember_app_name":settings.EMBER_APP_NAME}
             output = template.render(args)
-            file = open(settings.STATIC_ROOT + "/javascripts/app/models/operis-" + v["singular_converted"] + ".js", "w")
+            file = open(settings.PROJECT_DIR + "/../" + settings.EMBER_APP_NAME + "/app/models/operis-" + v["singular_converted"] + ".js", "w")
             file.write(output)
             file.close()
         
             self.logger.log("Creating Single Instance Controller for %s",[k],"info")
             template = env.get_template('ember/controllers/single.js')
-            args = {"model":v}
+            args = {"model":v,"ember_app_name":settings.EMBER_APP_NAME}
             output = template.render(args)
-            file = open(settings.STATIC_ROOT + "/javascripts/app/controllers/operis-" + v["singular_converted"] + ".js", "w")
+            file = open(settings.PROJECT_DIR + "/../" + settings.EMBER_APP_NAME + "/app/controllers/operis-" + v["singular_converted"] + ".js", "w")
             file.write(output)
             file.close()
             
             self.logger.log("Creating Single Instance Route for %s",[k],"info")
             template = env.get_template('ember/routes/single.js')
-            args = {"model":v}
+            args = {"model":v,"ember_app_name":settings.EMBER_APP_NAME}
             output = template.render(args)
-            file = open(settings.STATIC_ROOT + "/javascripts/app/routes/operis-" + v["singular_converted"] + ".js", "w")
+            file = open(settings.PROJECT_DIR + "/../" + settings.EMBER_APP_NAME + "/app/routes/operis-" + v["singular_converted"] + ".js", "w")
             file.write(output)
             file.close()
             
             self.logger.log("Creating Single Template for %s",[k],"info")
             template = env.get_template('ember/templates/single.handlebars')
-            args = {"model":v}
+            args = {"model":v,"ember_app_name":settings.EMBER_APP_NAME}
             output = template.render(args)
-            file = open(settings.STATIC_ROOT + "/javascripts/templates/" + v["singular_converted"] + ".handlebars", "w")
+            file = open(settings.PROJECT_DIR + "/../" + settings.EMBER_APP_NAME + "/app/templates/" + v["singular_converted"] + ".hbs", "w")
             file.write(output)
             file.close()
             
@@ -112,29 +115,29 @@ class Command(BaseCommand):
                 
                 self.logger.log("Creating Plural Instance Controller for %s",[k],"info")
                 template = env.get_template('ember/controllers/plural.js')
-                args = {"model":v}
+                args = {"model":v,"ember_app_name":settings.EMBER_APP_NAME}
                 output = template.render(args)
-                file = open(settings.STATIC_ROOT + "/javascripts/app/controllers/operis-" + v["plural_converted"] + ".js", "w")
+                file = open(settings.PROJECT_DIR + "/../" + settings.EMBER_APP_NAME + "/app/controllers/operis-" + v["plural_converted"] + ".js", "w")
                 file.write(output)
                 file.close()
                 
                 self.logger.log("Creating Plural Instance Route for %s",[k],"info")
                 template = env.get_template('ember/routes/plural.js')
-                args = {"model":v}
+                args = {"model":v,"ember_app_name":settings.EMBER_APP_NAME}
                 output = template.render(args)
-                file = open(settings.STATIC_ROOT + "/javascripts/app/routes/operis-" + v["plural_converted"] + ".js", "w")
+                file = open(settings.PROJECT_DIR + "/../" + settings.EMBER_APP_NAME + "/app/routes/operis-" + v["plural_converted"] + ".js", "w")
                 file.write(output)
                 file.close()
                 
                 self.logger.log("Creating Pllural Template for %s",[k],"info")
                 template = env.get_template('ember/templates/plural.handlebars')
-                args = {"model":v}
+                args = {"model":v,"ember_app_name":settings.EMBER_APP_NAME}
                 output = template.render(args)
-                file = open(settings.STATIC_ROOT + "/javascripts/templates/" + v["plural_converted"] + ".handlebars", "w")
+                file = open(settings.PROJECT_DIR + "/../" + settings.EMBER_APP_NAME + "/app/templates/" + v["plural_converted"] + ".hbs", "w")
                 file.write(output)
                 file.close()
                 
                 
             
-        self.logger.log("Done, templates are in %s",[settings.STATIC_ROOT],"info")
+        self.logger.log("Done, templates are in %s",[settings.EMBER_APP_NAME],"info")
         

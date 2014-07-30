@@ -1,5 +1,5 @@
 import Ember from 'ember';
-//import Person from 'ember-app/models/person';
+import Person from 'ember-app/models/person';
 
 var OperisPeopleRoute = Ember.Route.extend({
   queryParams: {
@@ -7,7 +7,7 @@ var OperisPeopleRoute = Ember.Route.extend({
       refreshModel: true
     }
   },
-  model: function( params ) {    
+  model: function( params ) {
       return this.store.find('person', params);
     }
 });

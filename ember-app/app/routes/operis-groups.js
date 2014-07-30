@@ -1,5 +1,5 @@
 import Ember from 'ember';
-//import Group from 'ember-app/models/group';
+import Group from 'ember-app/models/group';
 
 var OperisGroupsRoute = Ember.Route.extend({
   queryParams: {

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-//import User from 'ember-app/models/user';
+import User from 'ember-app/models/user';
 
 var OperisUsersRoute = Ember.Route.extend({
   queryParams: {
