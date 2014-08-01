@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {{ model.singular }} from '{{ember_app_name}}/models/{{ model.singular_converted }}';
+//import {{ model.singular }} from '{{ember_app_name}}/models/{{ model.singular_converted }}';
 
 var Operis{{ model.plural }}Route = Ember.Route.extend({
   queryParams: {

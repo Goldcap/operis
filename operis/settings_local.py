@@ -30,5 +30,6 @@ REST_FRAMEWORK = {
     'PAGINATE_BY_PARAM': 'page_size'
 }
 
+EMBER_MODELS = ["example.models"]
 EMBER_APP_NAME = "ember-app"
 EMBER_ENV = '{"environment":"development","baseURL":"/","locationType":"auto","EmberENV":{"FEATURES":{}},"APP":{"LOG_ACTIVE_GENERATION":true,"LOG_VIEW_LOOKUPS":true}}'
