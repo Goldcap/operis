@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default {
   name: 'easyForm',
-  initialize: function() {
+  initialize: function( container, app) {
 
     Ember.EasyForm.Input.reopen({
       errorsChanged: function() {
@@ -11,14 +11,15 @@ export default {
       },
       classNameBindings: ['wrapperConfig.inputClass', 'wrapperErrorClass'],
       didInsertElement: function() {
+        this._super();
         this.addObserver('context.errors' + this.property + '.@each', this, 'errorsChanged');
       }
     });
 
     Ember.EasyForm.Error.reopen({
       errorText: function() {
-        return this.get('errors.firstObject.message');
-      }.property('errors.firstObject.message', 'errors.firstObject').cacheable(),
+        return this.get('errors.firstObject');
+      }.property('errors.firstObject').cacheable(),
       updateParentView: function() {
         var parentView = this.get('parentView');
         if(this.get('errors.length') > 0) {
@@ -26,7 +27,7 @@ export default {
         }else{
           parentView.set('wrapperErrorClass', false);
         }
-      }.observes('errors.firstObject.message', 'errors.firstObject')
+      }.observes('errors.firstObject')
     });
 
     Ember.EasyForm.Submit.reopen({
@@ -41,16 +42,7 @@ export default {
       classNames: ['form-control']
     });
 
-    /*
-    Ember.EasyForm.Config.registerWrapper('default', {
-      inputTemplate: 'form-fields/input',
-
-      labelClass: 'control-label',
-      inputClass: 'form-group',
-      buttonClass: 'btn btn-primary',
-      fieldErrorClass: 'has-error',
-      errorClass: 'help-block'
-    });
-    */
+    var options = {};
+    Ember.EasyForm.Config.registerWrapper('default', options);
   }
 };
