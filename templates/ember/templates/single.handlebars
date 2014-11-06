@@ -4,5 +4,6 @@
   {% raw %}{{{% endraw %}input {{ field.name }} placeholder="Enter your {{ field.name_friendly }}"{% raw %}}}{% endraw %}
   {%- endif %}
   {%- endfor %}
-  <button {% raw %}{{{% endraw %}action "submit" model{% raw %}}}{% endraw %} class="small">Save</button>
+  <button {% raw %}{{{% endraw %}action "submit" model{% raw %}}}{% endraw %} class="small"><i class="fa fa-save"></i> Save</button>
+  <button {% raw %}{{{% endraw %}action "delete" model{% raw %}}}{% endraw %} class="small"><i class="fa fa-trash-o"></i> Delete</button>
 {% raw %}{{{% endraw %}/form-for{% raw %}}}{% endraw %}

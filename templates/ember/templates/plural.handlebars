@@ -6,19 +6,36 @@
         {{field}}
   </td>
   {%- endfor %}
+  <td>
+  &nbsp;
+  </td>
 </tr>
 </thead>
 <tbody>
 {% raw %}{{{% endraw %}#each {{ model.singular_converted }} in controller.paginatedContent{% raw %}}}{% endraw %}
  <tr>
-  {%- for field in model.index_list -%}
+  {%- for field in model.model -%}
+  {% if field.type != 'OneToMany' %}
   <td>
-        {% raw %}{{{% endraw %}#link-to "{{ model.singular_converted }}" {{ model.singular_converted }}{% raw %}}}{% endraw %}{% raw %}{{{% endraw %}{{ model.singular_converted}}.{{field}}{% raw %}}}{% endraw %}{% raw %}{{{% endraw %}/link-to{% raw %}}}{% endraw %}
+        {% raw %}{{{% endraw %}{{ model.singular_converted}}.{{field.name}}{% raw %}}}{% endraw %}
   </td>
+  {% endif %}
+  {% if field.type == 'OneToMany' %}
+  <td>
+      {% raw %}{{{% endraw %}#link-to "{{ field.plural_name }}.index" {% raw %}}}{% endraw %}
+      <button class="tiny"><i class="fa fa-pencil-square-o"></i> {{ field.name_converted }}</button>
+      {% raw %}{{{% endraw %}/link-to{% raw %}}}{% endraw %}
+  </td>
+  {% endif %}
   {%- endfor %}
+  <td>
+  {% raw %}{{{% endraw %}#link-to "{{ model.singular_converted }}" {{ model.singular_converted }}{% raw %}}}{% endraw %}
+  <button class="tiny"><i class="fa fa-pencil-square-o"></i> Edit</button>
+  {% raw %}{{{% endraw %}/link-to{% raw %}}}{% endraw %}
+  </td> 
 </tr>
 {% raw %}{{{% endraw %}/each{% raw %}}}{% endraw %}
 </tbody>
 </table>
 
-{% raw %}{{{% endraw %}pagination-links page=page num_pages=num_pages{% raw %}}}{% endraw %}
+{% raw %}{{{% endraw %}pagination-links model='{{ model.plural_converted }}' page=page num_pages=num_pages{% raw %}}}{% endraw %}
