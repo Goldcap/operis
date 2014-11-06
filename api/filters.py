@@ -5,6 +5,8 @@ returned by list views.
 from __future__ import unicode_literals
 from django.db import models
 from django.http.request import QueryDict
+from django.conf import settings   
+
 from rest_framework.compat import django_filters, six
 from functools import reduce
 import operator
@@ -23,7 +25,6 @@ class BaseFilterBackend(object):
         Return a filtered queryset.
         """
         raise NotImplementedError(".filter_queryset() must be overridden.")
-
 
 class DjangoFilterBackend(BaseFilterBackend):
     """
@@ -44,7 +45,10 @@ class DjangoFilterBackend(BaseFilterBackend):
         new_filter_fields = []
         if filter_fields:
             for field in filter_fields:
-                new_filter_fields.append(unconvert(field))
+                if settings.REST_FRAMEWORK["INITCAP_FIELDS"]:
+                    new_filter_fields.append(unconvert(field))
+                else:
+                    new_filter_fields.append(field)
         
         if filter_class:
             filter_model = filter_class.Meta.model
@@ -54,36 +58,39 @@ class DjangoFilterBackend(BaseFilterBackend):
                 (filter_model, queryset.model)
 
             return filter_class
-
+        
         if filter_fields:
             class AutoFilterSet(self.default_filter_set):
                 class Meta:
                     model = queryset.model
                     fields = new_filter_fields
+                    order_by = True
             return AutoFilterSet
+
 
         return None
     
-    def get_queryset(self, request):
-    
-        dict = {}
-        for item in request.QUERY_PARAMS:
-            dict[unconvert(item)] = request.QUERY_PARAMS[item]
-        qdict = QueryDict('')
-        qdict = qdict.copy()
-        qdict.update(dict)
-        return qdict
-        
-        
     def filter_queryset(self, request, queryset, view):
         filter_class = self.get_filter_class(view, queryset)
-
+        
         if filter_class:
-            return filter_class(self.get_queryset(request), queryset=queryset).qs
-
+            return filter_class(request.QUERY_PARAMS, queryset=queryset).qs
+            
         return queryset
 
+class EventItemTagFilterBackend(BaseFilterBackend):
+    """
+    A filter backend that uses django-filter.
+    """
+    default_filter_set = FilterSet
 
+    def __init__(self):
+        assert django_filters, 'Using DjangoFilterBackend, but django-filter is not installed'
+
+    def filter_queryset(self, request, queryset, view):
+        
+        return queryset.filter(level__in=[1,2])
+        
 class SearchFilter(BaseFilterBackend):
     search_param = 'search'  # The URL query parameter used for the search.
 
@@ -111,7 +118,10 @@ class SearchFilter(BaseFilterBackend):
         new_search_fields = []
         if search_fields:
             for field in search_fields:
-                new_search_fields.append(unconvert(field))
+                if settings.REST_FRAMEWORK["INITCAP_FIELDS"]:
+                    new_search_fields.append(unconvert(field))
+                else:
+                    new_search_fields.append(field)
         
         
         if not new_search_fields:
