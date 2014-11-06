@@ -1,0 +1,13 @@
+{
+  "name": "ember-easyForm",
+  "homepage": "https://github.com/Goldcap/ember-easyForm",
+  "_release": "929e2c46ae",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "929e2c46aedb7dfebcddabb57751bc6bccdab4bd"
+  },
+  "_source": "git://github.com/Goldcap/ember-easyForm.git",
+  "_target": "*",
+  "_originalSource": "git://github.com/Goldcap/ember-easyForm.git"
+}

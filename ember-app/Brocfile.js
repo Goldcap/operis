@@ -1,8 +1,19 @@
 /* global require, module */
 
+// Import a couple of modules;
+var mergeTrees  = require('broccoli-merge-trees');
+var pickFiles = require('broccoli-static-compiler');
+var compileSass = require('broccoli-sass');
+
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+var app = new EmberApp({
+    'foundation-sass': {
+        'modernizr': true,
+        'fastclick': true,
+        'foundationJs': 'all'
+    }
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -17,26 +28,28 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
                                                    
-app.import('vendor/ember-easyForm/dist/ember-easyForm.min.js');      
-app.import('vendor/ember-validations/dist/ember-validations.min.js'); 
-app.import('vendor/csrf.js'); 
-app.import('vendor/sprintf/dist/sprintf.min.js'); 
+app.import('bower_components/pikaday/pikaday.js');
+app.import('bower_components/ember-easyForm/dist/ember-easyForm.min.js');
+app.import('bower_components/ember-validations/dist/ember-validations.min.js');       
+app.import('bower_components/jquery-csrf/jquery.csrf.js'); 
+app.import('bower_components/sprintf/dist/sprintf.min.js'); 
+app.import('bower_components/moment/moment.js');            
 
-// Import a couple of modules;
-var mergeTrees  = require('broccoli-merge-trees');
-var compileSass = require('broccoli-sass');
+app.import("bower_components/components-font-awesome/css/font-awesome.css");
+app.import("bower_components/components-font-awesome/fonts/fontawesome-webfont.eot", { destDir: "fonts" });
+app.import("bower_components/components-font-awesome/fonts/fontawesome-webfont.svg", { destDir: "fonts" });
+app.import("bower_components/components-font-awesome/fonts/fontawesome-webfont.ttf", { destDir: "fonts" });
+app.import("bower_components/components-font-awesome/fonts/fontawesome-webfont.woff", { destDir: "fonts" });
+app.import("bower_components/components-font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
 
-// List all of the directories containing SASS source files
-var sassSources = [
-  'app/styles',
-  'vendor/foundation/scss'
-]
-
-// Compile a custom sass file, with the sources that need to be included
-var appCss = compileSass( sassSources , 'app_custom.scss', 'assets/app.css');
+var pikadayFiles = pickFiles('bower_components/pikaday', {
+  srcDir: '/css',
+  files: ['*'],
+  destDir: '/assets'
+});
 
 // Merge the ember app and the custom css into a single tree for export
-var appAndCustomDependencies = mergeTrees([app.toTree(),appCss], {
+var appAndCustomDependencies = mergeTrees([app.toTree(),pikadayFiles], {
   overwrite: true
 });
 

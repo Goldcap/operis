@@ -1,0 +1,16 @@
+{
+  "name": "jquery-csrf",
+  "main": [
+    "jquery.csrf.js"
+  ],
+  "homepage": "https://github.com/Goldcap/jquery-csrf",
+  "_release": "a3e986c4de",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "a3e986c4dec9974bc6e9213f813ea11ccaabc325"
+  },
+  "_source": "git://github.com/Goldcap/jquery-csrf.git",
+  "_target": "*",
+  "_originalSource": "git://github.com/Goldcap/jquery-csrf.git"
+}

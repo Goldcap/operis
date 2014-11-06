@@ -1,0 +1,14 @@
+{{#form-for model}}
+  {{input id placeholder="Enter your id"}}
+  {{input password placeholder="Enter your password"}}
+  {{input last_login placeholder="Enter your last_login"}}
+  {{input is_superuser placeholder="Enter your is_superuser"}}
+  {{input username placeholder="Enter your username"}}
+  {{input first_name placeholder="Enter your first_name"}}
+  {{input last_name placeholder="Enter your last_name"}}
+  {{input email placeholder="Enter your email"}}
+  {{input is_staff placeholder="Enter your is_staff"}}
+  {{input is_active placeholder="Enter your is_active"}}
+  {{input date_joined placeholder="Enter your date_joined"}}
+  <button {{action "submit" model}} class="small">Save</button>
+{{/form-for}}

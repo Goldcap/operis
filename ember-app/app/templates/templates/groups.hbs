@@ -1,0 +1,16 @@
+<table>
+<thead>
+ <tr>
+</tr>
+</thead>
+<tbody>
+{{#each group in controller.paginatedContent}}
+ <tr><td>
+        {{#link-to "group" group}}{{group.id}}{{/link-to}}
+  </td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+{{pagination-links page=page num_pages=num_pages}}

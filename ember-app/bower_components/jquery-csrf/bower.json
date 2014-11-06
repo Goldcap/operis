@@ -1,0 +1,5 @@
+{
+	"name": "jquery-csrf",
+	"version": "1.0.0",
+	"main": ["jquery.csrf.js"]
+}
